@@ -1,4 +1,4 @@
-pin = 4
+pin = 2
 wait = 2000000 --us
 ow.setup(pin)
 
@@ -66,9 +66,9 @@ t1 = lasttemp / 10000
 t2 = (lasttemp >= 0 and lasttemp % 10000) or (10000 - lasttemp % 10000)
 print("Temp:"..t1 .." C\n")
 
-http.get("http://184.106.153.149/update?key=<THINGSPEAK KEY>="..t1 , nil)
+http.get("http://api.thingspeak.com/update?api_key=<THINGSPEAK KEY>&field1="..t1, nil)
 
 end
 
-tmr.alarm(0,300000, 1, function() sendData() end )
+tmr.alarm(0,120000, 1, function() sendData() end )
 
